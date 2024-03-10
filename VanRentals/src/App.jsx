@@ -1,8 +1,8 @@
-import { useState } from 'react'
-import {Header, Hero,Footer,About} from "./sections"
+
+import {Header, Hero,Footer,About,Vans,VanDetail} from "./sections"
 import {BrowserRouter,Routes,Route} from "react-router-dom"
+import "./server"
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
@@ -13,6 +13,8 @@ function App() {
       <Routes>
           <Route path="/" element={<Hero />}/>
           <Route path="/about" element={<About />} />
+          <Route path="/vans" element={<Vans />} />
+          <Route path="/vans/:id" element={<VanDetail />}/>
       </Routes>
       <section>
         <Footer />
