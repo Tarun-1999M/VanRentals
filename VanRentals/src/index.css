@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.activeLink {
+    @apply underline text-[#161616] font-bold;
+  }
