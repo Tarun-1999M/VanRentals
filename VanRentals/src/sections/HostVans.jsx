@@ -1,36 +1,34 @@
 import React from 'react'
 import {NavLink} from "react-router-dom"
+import { useLoaderData } from 'react-router-dom'
+import { Auth } from '../components/Auth'
 
-const HostVans = () => {
-  const [data,setData] = React.useState('')
-  const [error,setError] =  React.useState(false)
+export async function loader(){
+  await Auth()
 
- React.useEffect(()=>{
-
-  async function fetchData(){
-    try{
-
-      const res = await fetch('/api/vans');
-      const data = await res.json();
-      setData(data.vans)
-    }
-    catch(error){
-      setError(error.message);
+  const res = await fetch('/api/vans')
+  if(!res.ok){
+    throw{
+      message:"cannot fetch vans",
+      status: res.status,
+      statusText: res.statusText
     }
   }
-  fetchData()
- },[])
+  const data = await res.json()
+  return data.vans
+}
 
- if(error){
-  alert(error.message)
- }
+const HostVans = () => {
+  const data = useLoaderData()
+  const [error,setError] =  React.useState(false)
+
 
   return (
     <div className='p-9 bg-[#f7e4cc]'>
       <h1 className='text-3xl font-bold'>Your listed vans</h1>
       { 
         data? data.map((van)=>(
-          <NavLink key={van.id}to={`/host/vans/${van.id}`}>
+          <NavLink key={van.id} to={`${van.id}`}>
           <div className='flex gap-2 items-center bg-white m-4 p-5 rounded-xl max-w-2xl'>
           <div><img src={van.imageUrl} className='h-[200px]'/></div>
           <div className='flex flex-col '>

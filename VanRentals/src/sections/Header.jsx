@@ -10,6 +10,7 @@ const Header = () => {
           <div></div><NavLink to="/host"  className={({isActive})=>isActive? "activeLink mr-9" : "mr-9"}>Host</NavLink>
           <NavLink to="/about" className={({isActive})=>isActive? "activeLink mr-9" : "mr-9"}>About</NavLink>
           <NavLink to="/vans" className={({isActive})=>isActive? "activeLink mr-9" : "mr-9"}>Vans</NavLink>
+          <NavLink to="/login" className={({isActive})=>isActive? "activeLink mr-9" : "mr-9"}>Login</NavLink>
         </div>
       </nav>
     </div>

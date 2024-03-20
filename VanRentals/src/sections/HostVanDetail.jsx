@@ -1,29 +1,25 @@
 import React from 'react'
-import { Outlet, useParams } from 'react-router-dom'
+import { Outlet, useLoaderData} from 'react-router-dom'
 import ButtonCard from '../components/ButtonCard'
 import {NavLink} from "react-router-dom"
-const HostVanDetail = () => {
-  const params = useParams()
-  const [vanInformation,setVanInformation] = React.useState('')
-  const [error,setError] = React.useState(false)
+import { Auth } from '../components/Auth'
+export async function loader({params}){
 
-  React.useEffect(()=>{
-    async function fetchData(){
-    try{
-      const res = await fetch(`/api/vans/${params.id}`)
-      const data = await res.json()
-      setVanInformation(data.vans)
-      }
-    catch(error){
-      setError(error.message)
+  await Auth()
+  const res = await fetch(`/api/vans/${params.id}`)
+  if(!res.ok){
+    throw{
+      message:"Error in fetching van Details",
+      status:res.status,
+      statusText:res.statusText
     }
   }
-    fetchData()
-  },[])
+  const data = await res.json()
+  return data.vans
+}
 
-  if(error){
-    alert(error.message)
-  }
+const HostVanDetail = () => {
+  const vanInformation = useLoaderData();
 
   return (
     <div>

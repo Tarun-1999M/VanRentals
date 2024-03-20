@@ -1,42 +1,36 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { NavLink,useParams,useLocation,useLoaderData } from 'react-router-dom'
 import ButtonCard from '../components/ButtonCard'
 
-const VanDetail = () => {
-    const params= useParams()
-    const [vanInformation,setVanInformation] = React.useState('')
-    const [error,setError] = React.useState(false)
-    console.log(params)
-   
-React.useEffect(()=>{
-    async function fetchData(){
-        try{
-            const res= await fetch(`/api/vans/${params.id}`)
-            const data = await res.json()
-            setVanInformation(data.vans)
-        }
-        catch(error){
-            setError(error.message)
-        }
+export async function loader({params}){
+  const res = await fetch(`/api/vans/${params.id}`)
+  if(!res.ok){
+    throw{
+      message:"can not fetch the data",
+      status:res.status,
+      statusText:res.statusText
     }
-    fetchData();
-},[params.id])
-
-React.useEffect(() => {
-    console.log(vanInformation);
-  }, [vanInformation]);
-
-  
-if(error){
-    alert(error.message)
+  }
+  const data = await res.json()
+  return data.vans
 }
 
+
+const VanDetail = () => {
+
+    const vanInformation = useLoaderData()
+    const location = useLocation()
+   
+const search = location.state && location.state.search || ""
+const type = location.state && location.state.type || "all"
   return (
     <div className='bg-[#f7e4cc]'>
       {
         vanInformation? 
-            (
+
+            (   
                 <div key={vanInformation.id} className='p-9 flex flex-col gap-4 max-w-4xl ml-8'>
+                <NavLink to={`..?${search}`} relative="path" className="underline">{`Back to ${type} vans`}</NavLink>
                 <img src={vanInformation.imageUrl} className='max-w-sm'/>
                 <div className='mt-2'><ButtonCard label={vanInformation.type} /></div>
                 <h1 className='text-4xl font-bold'>{vanInformation.name}</h1>

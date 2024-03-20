@@ -10,6 +10,8 @@ import HostVanDetail from "./HostVanDetail";
 import Details from "./Details"
 import Pricing from "./Pricing"
 import Photos from "./Photos"
+import FourOFour from "./FourOFour";
+import Login from "./Login"
 export{
     Header,
     Hero,
@@ -23,5 +25,7 @@ export{
     Details,
     Pricing,
     Photos,
+    FourOFour,
+    Login,
     
 }

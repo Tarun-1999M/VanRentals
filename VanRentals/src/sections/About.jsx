@@ -1,6 +1,7 @@
 import React from 'react'
 import aboutHero from "../assets/images/about-hero.png"
 import ButtonCard from '../components/ButtonCard'
+import { NavLink } from 'react-router-dom'
 const About = () => {
   return (
     <div className='flex flex-col justify-evenly p-9 bg-[#f7e4cc]'>
@@ -13,7 +14,7 @@ const About = () => {
       <p className='max-w-full text-2xl my-4'>Our team is full of vanlife enthusiasts who know firsthand the magic of touring the world on 4 wheels.</p>
       <div className='border-2 border-black outline-none bg-[#ddc69d] p-9 text-xl rounded-xl'>
         <h2 className='my-4 font-bold'>Your destination is waiting.<br />Your van is ready.</h2>
-        <div className='mt-4 text-white'><ButtonCard label="Explore our vans"/></div>
+        <div className='mt-4 text-white'><NavLink to="/vans"><ButtonCard label="Explore our vans"/></NavLink></div>
       </div>
       </div>
     </div>

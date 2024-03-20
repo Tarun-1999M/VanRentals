@@ -1,5 +1,6 @@
 import React from 'react'
 import ButtonCard from '../components/ButtonCard'
+import { NavLink } from 'react-router-dom'
 const Hero = () => {
   return (
     <div>
@@ -8,7 +9,7 @@ const Hero = () => {
           <p className='text-4xl my-4'>You got the travel plans, we got the travel vans</p>
           <p className='text-xl my-4'>Add adventure to your life by joining the #vanline movement.<br></br>
           Rent the perfect van to make your perfect road trip.</p>
-          <div><ButtonCard label="Find your van" /></div>
+          <div><NavLink to="/vans"><ButtonCard label="Find your van" /></NavLink></div>
         </div>
       </div>
     </div>
